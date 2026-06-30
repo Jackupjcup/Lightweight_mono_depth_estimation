@@ -1,0 +1,90 @@
+# Fast Mono Depth — Training Config
+
+# ─── Model ───
+model:
+  input_height: 476
+  input_width: 644
+  backbone_pretrained: true
+  dpt_features: 256
+  dpt_out_channels: [256, 512, 1024, 1024]
+  depth_activation: softplus
+  conf_activation: softplusp1
+
+# ─── Teacher ───
+teacher:
+  model_dir: /data-vepfs/lrd_projs/mono_body_dataset/Depth-Anything-3-main/models/DA3NESTED-GIANT-LARGE-1.1/
+  da3_src: /data-vepfs/lrd_projs/mono_body_dataset/Depth-Anything-3-main/src
+
+# ─── Data — LMDB ───
+data:
+  lmdb_path: /data-vepfs/lrd_projs/mono_depth_estimation/fast_mono_depth/data/tartanground.lmdb
+  train_index: /data-vepfs/lrd_projs/mono_depth_estimation/fast_mono_depth/data/annotations/tartanground_train_quarter.json
+  val_index: /data-vepfs/lrd_projs/mono_depth_estimation/fast_mono_depth/data/annotations/tartanground_val_quarter.json
+
+  # Resolution
+  input_height: 476
+  input_width: 644
+
+  # Ray computation (DA3 normalized [0,2] space)
+  ray_height: 238          # input_height // 2
+  ray_width: 322            # input_width // 2
+  coord_system: ned         # TartanGround pose frame (NED c2w)
+  ned_to_cv: [[0,0,1],[1,0,0],[0,1,0]]
+
+  # valid_mask: depth < depth_cap
+  depth_cap: 100.0          # depth >= cap → masked out & clipped
+
+  # Augmentation
+  augment: true
+  ## Random Horizonal Flip
+  flip_prob: 0.5
+
+  color_jitter:
+    brightness: 0.2
+    contrast: 0.2
+    saturation: 0.2
+    hue: 0.05
+
+# ─── Training ───
+training:
+  # batch_size: train & val
+  batch_size: 16
+  val_batch_size: 32
+  # num_workers: train & val
+  num_workers: 4
+  val_num_workers: 4
+
+  learning_rate: 1.0e-4
+  weight_decay: 0.05
+  optimizer: adamw
+  scheduler: cosine         # cosine | linear | constant
+  warmup_epochs: 1
+  hold_epochs: 5
+  total_epochs: 100
+
+# ─── Loss weights ───
+loss:
+  phase: 2              # 1 = feature distill only, 2 = full task losses
+  feat_weights: [1.0, 1.0, 1.0, 1.0]
+  # Phase 2 task loss weights (DA3 paper: α=1, β=1)
+  depth_weight: 1.0
+  ray_weight: 0.01
+  point_weight: 0.01
+  cam_weight: 0.01
+  grad_weight: 1.0
+  # Confidence regularization coefficient
+  lambda_c: 0.2
+  # Camera loss sub-weights
+  cam_trans_weight: 1.0
+  cam_rot_weight: 1.0
+  cam_fov_weight: 0.5
+
+# ─── Logging & checkpointing ───
+logging:
+  log_interval: 50        # 每 N 个 training step 打印+写 TensorBoard
+  save_interval: 1       # 每 N 个 epoch 存 checkpoint
+  eval_interval: 1        # 每 N 个 epoch 做 val 评估（含 AbsRel / δ）
+  delta_threshold: 1.25   # δ1 = % pixels where max(ŷ/y, y/ŷ) < threshold
+  depth_cap: 100.0        # 评估时忽略 gt_depth > cap 的像素
+  early_stop_metric: delta # 早停监控指标: "delta" | "feat" | "none"(禁用)
+  early_stop_patience: 3  # 连续 N 次 eval 无改善则停止

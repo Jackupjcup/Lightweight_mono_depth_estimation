@@ -1,0 +1,33 @@
+# 数据集目录（体积太大）
+data/
+
+# .claude 对话记录
+.claude/
+
+# work_dirs：排除所有 v0 系列
+work_dirs/v0/
+work_dirs/v0_distill/
+work_dirs/v0_fortieth/
+work_dirs/v0_quarter/
+work_dirs/v0_tenth/
+work_dirs/v0_tenth_distill/
+work_dirs/v0_tenth_v1/
+work_dirs/v0_twentieth/
+work_dirs/v0_v1/
+work_dirs/v1_tenth_phase1/
+work_dirs/infer_res/
+work_dirs/vis_feat/
+work_dirs/sample_20_vis.png
+
+# work_dirs：忽略所有模型权重和实验结果
+work_dirs/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+.eggs/
+*.egg-info/
+
+# 系统文件
+.DS_Store

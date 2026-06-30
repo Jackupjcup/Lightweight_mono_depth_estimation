@@ -1,0 +1,9 @@
+Recomputing scales for 1207717 samples (clamp=100.0m)...
+
+Traceback (most recent call last):
+  File "/data-vepfs/lrd_projs/mono_depth_estimation/fast_mono_depth/tools/fix_scales.py", line 98, in <module>
+    main()
+  File "/data-vepfs/lrd_projs/mono_depth_estimation/fast_mono_depth/tools/fix_scales.py", line 54, in main
+    depth_buf = txn.get(f"{frame_key}/depth".encode())
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lmdb.CorruptedError: mdb_get: MDB_CORRUPTED: Located page was wrong type

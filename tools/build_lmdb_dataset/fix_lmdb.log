@@ -1,0 +1,22 @@
+Loading scan cache...
+  739 trajectories
+
+Finding incomplete trajectories...
+  17 incomplete trajectories
+
+--- Reprocessing incomplete trajectories ---
+  [1/17] OldBrickHouseNight/Data_omni/P0002                 frames=672/672  28.5min  [2/17] OldBrickHouseDay/Data_omni/P0003                   frames=736/736  31.1min  [3/17] OldBrickHouseDay/Data_omni/P0004                   frames=770/770  31.8min  [4/17] OldBrickHouseNight/Data_omni/P0001                 frames=966/966  35.1min  [5/17] Office/Data_omni/P0001                             frames=1072/1072  36.5min  [6/17] OldBrickHouseNight/Data_omni/P0004                 frames=1188/1188  38.5min  [7/17] OldBrickHouseDay/Data_omni/P0000                   frames=1160/1160  38.9min  [8/17] OldBrickHouseNight/Data_omni/P0000                 frames=1247/1247  38.9min  [9/17] OldBrickHouseDay/Data_omni/P0001                   frames=1240/1240  39.9min  [10/17] OldBrickHouseNight/Data_omni/P0003                 frames=1376/1376  40.6min  [11/17] Office/Data_omni/P0003                             frames=1519/1519  41.8min  [12/17] OldBrickHouseDay/Data_omni/P0002                   frames=1503/1503  42.5min  [13/17] OldScandinavia/Data_diff/P1000                     frames=1091/1091  44.4min  [14/17] NordicHarbor/Data_omni/P0002                       frames=2627/2627  49.1min  [15/17] NordicHarbor/Data_diff/P1003                       frames=3450/3450  53.1min  [16/17] NordicHarbor/Data_omni/P0004                       frames=3567/3567  53.4min  [17/17] NordicHarbor/Data_omni/P0005                       frames=3641/3641  53.8min
+  Done: 17 trajectories in 53.8min
+
+Reading scales from LMDB for old trajectories...
+  Read scales for 452 old trajectories
+
+Merging scales...
+  739/739 trajectories have scales
+
+--- Regenerating index + train/val split ---
+Index saved: /root/vepfs/lrd_projs/mono_depth_estimation/fast_mono_depth/data/tartanground_index.json (1207717 samples)
+train: 1079955 samples, 656 trajectories, 52 scenes → /root/vepfs/lrd_projs/mono_depth_estimation/fast_mono_depth/data/tartanground_train.json
+val: 127762 samples, 83 trajectories, 52 scenes → /root/vepfs/lrd_projs/mono_depth_estimation/fast_mono_depth/data/tartanground_val.json
+
+Scale coverage: 1207717/1207717 (100.0%)
