@@ -15,6 +15,16 @@ preserving depth estimation capability while drastically reducing inference cost
 
 ---
 
+## Qualitative Results
+
+Comparison using the `best_delta.pt` checkpoint. From left to right: **RGB input**, **normalized ground-truth depth**, **DA3 teacher relative depth**, and **student-predicted depth**. Each row shows a different scene; depth panels use their displayed colour scales.
+
+[![RGB, ground truth, DA3 teacher and student depth comparisons](results/comparison.png)](results/comparison.png)
+
+[Open the full-resolution comparison](results/comparison.png).
+
+---
+
 ## 1. Overview
 
 This project is a **knowledge distillation training framework** that transfers the capabilities of

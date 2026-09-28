@@ -15,6 +15,17 @@
 
 ---
 
+## 定性结果展示
+
+以下为 `best_delta.pt` 检查点的结果对比。从左到右依次是 **RGB 输入**、**归一化真值深度**、**DA3 教师模型相对深度**和**学生模型预测深度**。每行对应一个场景，各深度图的数值范围以其色条为准。
+
+[![RGB 输入、真值深度、DA3 教师与学生模型预测对比](results/comparison.png)](results/comparison.png)
+
+[查看完整分辨率对比图](results/comparison.png)。
+
+---
+
+
 ## 1. 概述
 
 本项目是一个 **知识蒸馏 (Knowledge Distillation) 训练框架**，把大型单目深度模型
